@@ -139,7 +139,8 @@ static NSInteger const kAlertViewTag = 16033018;
         case VerifyMode: {
             if (_isGoLogin == YES) {
                 self.title = @"请输入原密码";
-                _userLabel.text = [NSString stringWithFormat:@"欢迎您, %@", [CachesData readUserName]];
+//                _userLabel.text = [NSString stringWithFormat:@"欢迎您, %@", [CachesData readUserName]];
+                _userLabel.text = [NSString stringWithFormat:@"欢迎您, %@", @"Tony"];
             }
             else if (_isModify == YES) {
                 self.title = @"手势密码";
@@ -334,7 +335,7 @@ static NSInteger const kAlertViewTag = 16033018;
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
                                                                 
-                                                                NSLog(@"我要 重新登录 !");
+                                                                DLog(@"我要 重新登录 !");
                                                                 [this goLogin];
                                                             }];
         [actionAlertController addAction:actionOther];
@@ -603,18 +604,18 @@ static NSInteger const kAlertViewTag = 16033018;
     if (_isGoLogin == YES) {  // 手势密码 登录 时
         _errorGestureNum ++;
         
+        _tipLbel.hidden = NO;
+        _tipLbel.text = [[NSString alloc] initWithFormat:@"手势密码不正确,剩余尝试次数%ld次",(long)(errorGestureSum - _errorGestureNum)];
+        
         // 手势密码 多次 输入 错误,  强制账号密码登录 重新设置手势密码
         if (_errorGestureNum >= errorGestureSum) {
             // 弹窗 提示 重新登录 (关闭手势密码)
-            NSLog(@"强制账号密码登录 😢重新设置手势密码");
+            DLog(@"强制账号密码登录 😢重新设置手势密码");
 //            [NSString stringWithFormat:@"%d错误,请重新登录", errorGestureSum];
             _errorGestureNum = 0;
             
             [self forgetGesture:_forgetButton];
         }
-        
-        _tipLbel.hidden = NO;
-        _tipLbel.text = [[NSString alloc] initWithFormat:@"手势密码不正确,剩余尝试次数%ld次",(long)(errorGestureSum - _errorGestureNum)];
     }
     else {  // 设置 手势密码时, 验证手势 密码
         

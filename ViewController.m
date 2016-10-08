@@ -63,6 +63,8 @@
     [self initBackGroundView];
     
     [self initMemberInfo];
+    
+    DLog(@"手势密码");
 }
 
 - (void)initNavGationItem

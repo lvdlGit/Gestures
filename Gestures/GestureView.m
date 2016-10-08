@@ -109,7 +109,7 @@
         if(![num objectForKey:@"num"])break;
         [resultString appendString:[num objectForKey:@"num"]];
     }
-    NSLog(@"resultString:%@",resultString);
+    DLog(@"resultString:%@",resultString);
     
     if (resultString.length > 0) {
         if(_style==VerifyMode){
